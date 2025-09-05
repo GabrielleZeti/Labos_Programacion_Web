@@ -1,0 +1,66 @@
+/* Reset muy simple */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    background: #f5f5f5;
+    color: #222;
+    padding: 20px;
+}
+
+.site-header {
+    background: #7627F5;
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.site-header h1 {
+    font-size: 1.4rem;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+}
+
+.main-content {
+    margin-top: 18px;
+}
+
+.intro {
+    margin-bottom: 12px;
+}
+
+.cards {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    padding: 12px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    flex: 1 1 200px;
+    min-width: 180px;
+}
+
+.site-footer {
+    margin-top: 18px;
+    text-align: center;
+    color: #555;
+}
