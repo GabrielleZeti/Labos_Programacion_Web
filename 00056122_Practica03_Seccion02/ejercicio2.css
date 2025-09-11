@@ -1,0 +1,37 @@
+:root {
+    --color-principal: #1565c0;
+    --color-secundario: #f5f5f5;
+    --color-texto: #222;
+    --padding-general: 12px;
+    --radio-borde: 6px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--color-secundario);
+    color: var(--color-texto);
+    padding: var(--padding-general);
+}
+
+h1 {
+    margin-bottom: var(--padding-general);
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: #e3f2fd;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.item {
+    background: var(--color-principal);
+    color: white;
+    padding: 20px;
+    flex: 1 1 100px;
+    text-align: center;
+    border-radius: var(--radio-borde);
+}

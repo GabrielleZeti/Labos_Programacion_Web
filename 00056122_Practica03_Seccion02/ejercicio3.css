@@ -1,0 +1,58 @@
+:root {
+    --color-principal: #1565c0;
+    --color-secundario: #f5f5f5;
+    --color-texto: #222;
+    --padding-general: 12px;
+    --radio-borde: 6px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--color-secundario);
+    color: var(--color-texto);
+    padding: var(--padding-general);
+}
+
+h1 {
+    margin-bottom: var(--padding-general);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "a a a"
+        "b c d"
+        "e e e";
+    gap: 10px;
+}
+
+.caja {
+    background: #bbdefb;
+    padding: 20px;
+    border-radius: var(--radio-borde);
+    text-align: center;
+}
+
+.a {
+    grid-area: a;
+    background: var(--color-principal);
+    color: white;
+}
+
+.b {
+    grid-area: b;
+}
+
+.c {
+    grid-area: c;
+}
+
+.d {
+    grid-area: d;
+}
+
+.e {
+    grid-area: e;
+}
