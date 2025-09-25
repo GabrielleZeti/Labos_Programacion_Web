@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio Final - Guia 4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .day-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .day-btn {
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .day-btn:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .day-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .reminder-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+            border-left: 5px solid #667eea;
+        }
+
+        .day-title {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .reminder-text {
+            color: #666;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .today-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .today-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .day-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📅 Recordatorio Semanal</h1>
+        <p class="subtitle">Selecciona un día para ver tu actividad programada</p>
+
+        <div class="day-selector" id="daySelector">
+            <button class="day-btn" data-day="Lunes">Lunes</button>
+            <button class="day-btn" data-day="Martes">Martes</button>
+            <button class="day-btn" data-day="Miercoles">Miércoles</button>
+            <button class="day-btn" data-day="Jueves">Jueves</button>
+            <button class="day-btn" data-day="Viernes">Viernes</button>
+            <button class="day-btn" data-day="Sabado">Sábado</button>
+            <button class="day-btn" data-day="Domingo">Domingo</button>
+        </div>
+
+        <button class="today-btn" id="todayBtn">¿Qué tengo que hacer HOY?</button>
+
+        <div class="reminder-card" id="reminderCard">
+            <div class="day-title" id="dayTitle">Selecciona un dia</div>
+            <div class="reminder-text" id="reminderText">Elige un dia de la semana para ver tu actividad programada
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function obtenerRecordatorio(dia) {
+            const actividades = {
+                'Lunes': 'Debo atender un cliente especifico. Preparar toda la documentacion necesaria y revisar los requerimientos del proyecto.',
+                'Martes': 'Visito una agencia fuera de la ciudad. Salir temprano, llevar portatil y documentacion de trabajo.',
+                'Miércoles': 'Debo llevar a mi hija al ballet. No olvidar el uniforme y llegar 15 minutos antes.',
+                'Jueves': 'Debo priorizar entregas de desarrollo. Revisar el estado de los proyectos pendientes y coordinar con el equipo.',
+                'Viernes': 'Debo atender problemas de manera remota. Mantener las comunicaciones abiertas y documentar soluciones.',
+                'Sábado': 'Debo hacer lo que mi esposa quiera. Mantener el dia libre para actividades familiares.',
+                'Domingo': 'Dia de descanso y planificación de la proxima semana. Revisar agenda y preparar prioridades.'
+            };
+
+            return actividades[dia] || 'No hay actividad programada para este dia.';
+        }
+
+        function mostrarRecordatorio(dia) {
+            const dayTitle = document.getElementById('dayTitle');
+            const reminderText = document.getElementById('reminderText');
+
+            dayTitle.textContent = dia;
+            reminderText.textContent = obtenerRecordatorio(dia);
+
+            document.querySelectorAll('.day-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.day === dia) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function obtenerDiaActual() {
+            const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const fecha = new Date();
+            return dias[fecha.getDay()];
+        }
+
+        document.querySelectorAll('.day-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                mostrarRecordatorio(btn.dataset.day);
+            });
+        });
+
+        document.getElementById('todayBtn').addEventListener('click', () => {
+            const diaActual = obtenerDiaActual();
+            mostrarRecordatorio(diaActual);
+        });
+
+        window.addEventListener('load', () => {
+            const diaActual = obtenerDiaActual();
+            mostrarRecordimiento(diaActual);
+        });
+
+        function mostrarRecordimiento(dia) {
+            mostrarRecordatorio(dia);
+        }
+    </script>
+</body>
+
+</html>
